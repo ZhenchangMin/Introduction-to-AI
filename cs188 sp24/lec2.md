@@ -15,17 +15,22 @@ Planning agents:
 ## Search Problems
 A `search problem` consists of:
 - A state space
-- A successor function
+- A successor function(with actions and costs)
 - A start state
 - A goal test
+
+![successor_function](image/lec2/1.png)
 
 A `solution` is a sequence of actions (a plan) which transforms the start state to a goal state
 ![Example](image/lec2/1756949471181.png)
 
+
 ### What's in a State Space
-The `world state` includes every last detail of the environment
-A `search state` keeps only the details needed for planning (abstraction)
+The states of world is enormous, not even countable.
+The `world state` includes every last detail of the current environment, while the `search state` includes everything just needed for planning(abstraction). 
 ![In a state space](image/lec2/1756949755049.png)
+![state space size](image/lec2/2.png)
+
 
 ## State Space Graphs
 ![State space graph](image/lec2/1756949871442.png)
@@ -46,5 +51,8 @@ We can use stacks to store frontiers.
 - is_empty(frontier)
 - pop(): remove the last element in the stack
 - add(node): add a node to the stack
+![example of tree search](image/lec2/3.png)
 
+How we can know which path to add on fringe and expand?
 ## Depth-First Search
+The fringe in DFS is a last-in first-off stack(LIFO)
