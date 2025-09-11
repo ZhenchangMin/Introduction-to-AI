@@ -56,3 +56,15 @@ We can use stacks to store frontiers.
 How we can know which path to add on fringe and expand?
 ## Depth-First Search
 The fringe in DFS is a last-in first-off stack(LIFO)
+![example of tree search](image/lec2/4.png)
+Take this as an example.
+Assume that we go from right to left, so the first one added into fringe would be the root `S`.
+Then we add `S->p`, `S->e` and `S->d` into the fringe.
+Now that we didn't reach the goal state, we pop the very last one in the fringe, and replace with `S->d->e`, `S->d->c` and `S->d->b`.
+Now `Sdb` is at top so we take it off and put its child on, getting `Sdba`.
+Given that `a` is a leaf node, and we're not reaching goal state, we pop it out and the top of the fringe would actually be `Sdc`.
+Then `Sdca` shares the same result, we look for `Sde`, and after multiple steps we finally get a path to G.
+
+Depth-First: go down until we can't go anymore, then go backup and try another way and keep going until meet the goal.
+
+## Search Algorithm Properties
