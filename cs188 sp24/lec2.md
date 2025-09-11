@@ -68,3 +68,13 @@ Then `Sdca` shares the same result, we look for `Sde`, and after multiple steps 
 Depth-First: go down until we can't go anymore, then go backup and try another way and keep going until meet the goal.
 
 ## Search Algorithm Properties
+- Complete: Whether it guarantees to find a solution if one exists?
+When meet an infinite loop, might be unable to return a solution.
+- Optimal: Whether it guarantees to find the least cost path?  --No.
+- Time Complexity?
+- Space Complexity?
+![cartoon of tree](image/lec2/5.png)
+![how DFS expand](image/lec2/6.png)
+Might wonder why not start from right side, cuz in reality it is uninformed search so we don't know whether start from right would be faster.
+
+## Breadth-First Search
