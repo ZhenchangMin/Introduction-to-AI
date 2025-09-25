@@ -42,3 +42,42 @@ Is it when we see the goal state we return?
 In this case, we expand b because it has smallest $f(n) = 1 + 2 = 3$, and we see the goal state `G`, but if we return the path immediately, we're wrong cuz the other route has smaller cost.
 
 So only when the goal state is about to be expanded, we return the entire path.
+
+UCS and Greedy are special cases of A* search.
+
+Is A* search always optimal?
+![1758813592960](image/lec3/1758813592960.png)
+Could go wrong cuz heuristic is just an estimate, and it could go wrong.
+So we need heuristics to be less than or equal to the actual cost to the goal state.
+
+#### Admissible Heuristic
+![1758813729950](image/lec3/1758813729950.png)
+A heuristic h is admissible if it never overestimates the cost to reach the goal state.
+$$
+0\leq h(n) \leq h^*(n)
+$$
+
+$h^*(n)$ is the actual cost to reach a nearest state.
+Admissible heuristics only underestimate the distance to reach the goal state.
+
+#### Optimality of A* Search
+![1758814010452](image/lec3/1758814010452.png)
+A is shorter path than B.
+A is an optimal node and B is a suboptimal node.
+
+### Creating Heuristics
+Often, admissible heuristics are solutions to **relaxed problems**.
+Like in the example of traveling from Arad to Bucharest, we can relax the problem by not considering the traffic, and we can fly!
+Another example is like pacman can cross through walls.
+![1758814764051](image/lec3/1758814764051.png)
+Heuristic: number of tiles out of place.
+It solves a relaxed problem where we can move any tile to any position.
+
+Another heuristic is Manhattan distance for every tile.
+![1758814988049](image/lec3/1758814988049.png)
+
+What if we use the actual cost as a heuristic?
+The problem is that it might be difficult to find the actual cost, meaning we have to actually solve the planning problem.
+
+If heuristic h1 is always bigger than h2 for every node, then we say h1 is more accurate, and max(h1,h2) is still admissible.
+Using h1 would cost us even less time to find the optimal solution.
