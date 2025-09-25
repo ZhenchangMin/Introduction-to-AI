@@ -28,3 +28,17 @@ There might be a cheaper path to the goal state that we didn't explore, and heur
 ![1758772501909](image/lec3/1758772501909.png)
 
 ### A* Search
+We can view greedy search as a **hare**, as it goes directly for the target, while UCS as a **tortoise** because it takes a lot of time but will definitely find an optimal goal state.
+Is there a way to combine these two?
+
+Uniform-cost orders by **path cost**, or **backward cost** $g(n)$
+Greeedy orders by **heuristic value**(goal proximity), or **forward cost** $h(n)$
+
+Putting them together, A* search orders by $f(n) = g(n) + h(n)$
+![1758806993062](image/lec3/1758806993062.png)
+We expand the node with smallest $f(n)$.
+Is it when we see the goal state we return?
+![1758807083938](image/lec3/1758807083938.png)
+In this case, we expand b because it has smallest $f(n) = 1 + 2 = 3$, and we see the goal state `G`, but if we return the path immediately, we're wrong cuz the other route has smaller cost.
+
+So only when the goal state is about to be expanded, we return the entire path.
