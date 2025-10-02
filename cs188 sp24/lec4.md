@@ -63,3 +63,28 @@ Always remember: models are not real world.
 
 ## Local Search (Hill Climbing)
 In many optimization problems, the **path** is not important, the **goal state** is the solution.
+The state spaces are still defined as a set of complete configurations, but the goal state can just be a configuration that satisfy some constraints, or looking for one optimal configuration.
+
+In these cases, we can use **iterative improvement** algorithms: keep track of the **current** state, and try to improve it by moving to a better state.
+It uses constant space cuz we only focus on one state.
+
+General idea of hill climbing:
+- Start wherever
+- Repeat: move into the best neighboring state
+- Quit when no better neighbor state
+
+### Example: n-Queens Problem
+Queen will attack each other if they are in the same row, column, or diagonal.
+Our goal is to place n queens on an n×n chessboard such that no two queens threaten each other.
+![1759398300003](image/lec4/1759398300003.png)
+We use this as heuristic function, and generate an hill-climbing algorithm.
+![1759398376625](image/lec4/1759398376625.png)
+While we might meet challenges in local search, if we're getting a local maximum instead of a global one, we would still return this while this might not be the optimal solution.
+![1759407910175](image/lec4/1759407910175.png)
+One easy fix is we start randomly, at many initial states and we may get the global maximum, and random sideways.
+
+Use this hill climbing algorithm to solve the n-Queens problem.
+![1759408391528](image/lec4/1759408391528.png)
+
+## Simulated Annealing
+
