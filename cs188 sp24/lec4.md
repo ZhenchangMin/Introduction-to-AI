@@ -14,15 +14,16 @@ Is this still optimal?
 If the node next to expand is in the closed set, then we should not expand it, just pop the path in the fringe.
 
 But in this case, SBCG is not the optimal path! Why is this? Why A* Graph Search failed?
-That's because we need consistent heuristic function.
+That's because we need consistent heuristic function, or the order of expansion may lead to suboptimal paths because it might include one node in the closed set while it is the optimal path.
 
 ### Consistency of Heuristics
 The idea of an admissible heuristic is that it always **underestimate** the true cost to reach the goal.
 Consistency: heuristic "*arc*" cost $\leq$ actual cost for each arc
 
 This is different from admissibility, which focuses on estimating the cost to reach the goal.
-This estimates the node to another node, aka the cost of the arc.
+This estimates the node to any another node, aka the cost of the arc.
 In this way the heuristic could underestimate the cost of an **action**.
+The arc might include **multiple actions**, it estimates the cost to get to any other node.
 ![1759244760524](image/lec4/1759244760524.png)
 In this example, say that we're going from `A` to `C`, and this action's true cost is 1, while the heuristic estimate is 3, so it is not consisitent.
 If $h(A)-h(C)\leq cost(A \text{ to } C)$ for all A and C, we say it is consistent.
@@ -37,4 +38,28 @@ If we change $h(A)$ to 2 in the case, it would be consistent.
 If we have consistent heuristics for all nodes, then the f value never decreases along one specific path and the A* Graph Search would be optimal.
 
 ### Optimality of A* Graph Search
-Fact 1: A* expands nodes in increasing f value for sure, because heuristic is always smaller than actual cost.
+Fact 1: A* expands nodes in increasing f value for sure, because heuristic is always smaller than actual cost, until it reaches the goal with the least f value.
+Fact 2: For every state, nodes leading to optimality would be expanded before any non-optimal nodes.
+Fact 3: As for the goal state, its heuristic is always 0, so having least f value means it has least cost (G value) to reach the goal.
+
+So A* Graph Search is optimal if the heuristic is **consistent**.
+And recap that A* Search is optimal if the heuristic is **admissible**.
+
+Being consistent implies admissibility, cuz admissible heuristic just need to underestimate the arc to get to the goal, while consistent heuristic need to underestimate all arc from this node to any other node.
+
+### Improvement of A* Graph Search
+A* keeps track of the entire explored region, even A* graph search, so it might be a huge memory cost.
+To make it better, we can use **iterative deepening A* (IDA*)**, which is a variant of A* that limits the depth of the search to a certain value.
+Just like the Iterative Deepening Search of DFS, IDA* change the depth limit into an f value limit.
+On each iteration, it remembers the smallest f value above the limit and use it as the new limit for the next iteration.
+
+This is very efficient when f is real and each node has a unique value.
+
+## Search and Models
+Modeling is the first step, turning the real world problem into a model that can be solved by search algorithms.
+If we have a bad model, no matter how optimal the search algorithm is, it would not work.
+
+Always remember: models are not real world.
+
+## Local Search (Hill Climbing)
+In many optimization problems, the **path** is not important, the **goal state** is the solution.
