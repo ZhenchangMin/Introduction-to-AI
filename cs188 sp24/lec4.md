@@ -84,7 +84,25 @@ While we might meet challenges in local search, if we're getting a local maximum
 One easy fix is we start randomly, at many initial states and we may get the global maximum, and random sideways.
 
 Use this hill climbing algorithm to solve the n-Queens problem.
-![1759408391528](image/lec4/1759408391528.png)
 
-## Simulated Annealing
+### Simulated Annealing
+Basic idea:
+- Occasionally allow worse moves depending on the current temperature.
+- High temperature allows more random moves, shaking the system out of local maximum.
+- Gradually reduce the temperature to some schedule.
+- Return the state when temperature reaches 0.
 
+Can be proved if t decreases slow enough, finally would get the solution.
+
+### Local Beam Search
+Basic idea:
+- K copies of a local search algorithm, initialized randomly
+- For each iteration, generate all successors of all K current states
+- Keep the best K successors to be new current states for the next iteration
+
+So if we get "bad" outcomes, it won't be chosen for the next iteration.
+
+Why is this better than running k algorithms parallel?
+These search **communicates** with each other, and each search is not independent, choosing best K successors is a process that they communicate with each other.
+
+This is like the Biological Evolution, good ones selected and bad ones eliminated.
