@@ -92,3 +92,43 @@ Therefore when in ghost's control, it chooses the minimum value of the two child
 
 #### Tic-Tac-Toe Game Tree
 ![1759655636413](image/lec5/1759655636413.png)
+How to get value of states?
+We already know the value of terminal states, and for its parents just take the max or min value of its children depending on whose turn it is.
+
+The Tic-Tac-Toe game is small enough that we can enumerate all possible states and generate the game tree.
+
+### Adversarial Search: Minimax
+Works for deterministic zero-sum games.
+We need a state-space search tree, and the players alternate turns to play.
+The minimax algorithm can compute each node's minimax value, which is the best achievable utility against a rational adversary.
+![1759656106568](image/lec5/1759656106568.png)
+The utility of the terminal states are the utilities we already know.
+For non-terminal states, we just take the max or min value of its children depending on whose turn it is.
+![1759656207529](image/lec5/1759656207529.png)
+One way to implement minimax is to use recursion, like in this case, max and min recursively call each other.
+![1759656349576](image/lec5/1759656349576.png)
+![1759656486602](image/lec5/1759656486602.png)
+This is like the DFS, we update the value of the state after we visit its children.
+
+In this version, we visit every state in the game tree, and update the value of the state every time after we visit its children.
+
+### Handling Games with 3+ Players
+![1759657183233](image/lec5/1759657183233.png)
+Maximize the number of corresponding color.
+The value can be a tuple, and just maximize the player's color in the tuple.
+
+Minimax algorithm works like DFS, so they have similar time complexity.
+So this could be a waste of time if the game tree is very large.
+For instance, for chess it could take $35^{100}$ time, and it is not feasible to enumerate all possible states.
+
+### Game Pruning with Resource Limits
+![1759657520202](image/lec5/1759657520202.png)
+Like in the biginning, we set the red node with $+\infty$, and it tries to get a minimum of its children, so its first child being value 3, we know value of red node must be $\leq 3$, so 3 is now a bound for red node.
+![1759657700174](image/lec5/1759657700174.png)
+We visit all children of red node1 and get its final value as 3, so blue node value must be $\geq 3$.
+Now we already know the second red node $\leq 2$, do we have to visit more children?
+No! Because we already know blue is $\geq 3$, so we can prune the second red node.
+
+We can prune this red node because its value is already $\leq 2$, which is less than the lower bound of blue node.
+
+By doing these we prune the tree and save lots of time.
